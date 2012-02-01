@@ -2,9 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-        <TextView android:layout_width="fill_parent" android:id="@+id/textFacebook"
-                android:gravity="center_horizontal" android:layout_height="wrap_content"
-                android:text="@string/welcome" android:layout_alignParentTop="true" />
         <Button android:text="@string/enter" android:id="@+id/buttonLogin"
                 android:layout_below="@+id/textFacebook"
                 android:layout_centerHorizontal="true" android:layout_width="wrap_content"

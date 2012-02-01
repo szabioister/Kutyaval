@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.AsyncFacebookRunner.RequestListener;
@@ -34,8 +33,8 @@ public abstract class FBConnectionActivity extends Activity {
         private SharedPreferences sharedPrefs;
         private Context mContext;
  
-        private TextView username;
         private ProgressBar pb;
+        public String facebook_uid;
  
         public void setConnection() {
                 mContext = this;
@@ -43,9 +42,9 @@ public abstract class FBConnectionActivity extends Activity {
                 mAsyncRunner = new AsyncFacebookRunner(mFacebook);
         }
  
-        public void getID(TextView txtUserName, ProgressBar progbar) {
-                username = txtUserName;
+        public void getID(String uid, ProgressBar progbar) {
                 pb = progbar;
+                facebook_uid = uid;
                 if (isSession()) {
                         Log.d(TAG, "sessionValid");
                         mAsyncRunner.request("me", new IDRequestListener());
@@ -112,12 +111,12 @@ public abstract class FBConnectionActivity extends Activity {
                                 JSONObject json = Util.parseJson(response);
  
                                 final String id = json.getString("id");
-                                final String name = json.getString("name");
                                 FBConnectionActivity.this.runOnUiThread(new Runnable() {
                                         public void run() {
-                                                username.setText("Welcome: " + name+"\n ID: "+id);
+                                        		// itt kell az idvel csinalni a logint
                                                 pb.setVisibility(ProgressBar.GONE);
- 
+                                                facebook_uid = id;
+                                                Log.d(TAG, "UID: " + facebook_uid);
                                         }
                                 });
                         } catch (JSONException e) {
